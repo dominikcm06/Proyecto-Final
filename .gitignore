@@ -2,9 +2,9 @@
 thumbs.db
 *.DS_Store
 
-# Node modules (Included by user request)
-# node_modules/
-# **/node_modules/
+# Node modules
+node_modules/
+**/node_modules/
 
 # Environment variables
 .env
