@@ -1,0 +1,24 @@
+# System files
+thumbs.db
+*.DS_Store
+
+# Node modules
+node_modules/
+**/node_modules/
+
+# Environment variables
+.env
+
+# Angular build output
+dist/
+/dist
+/out-tsc
+
+# IDEs
+.vscode/
+.idea/
+
+# Backend logs
+npm-debug.log
+logs/
+*.log
