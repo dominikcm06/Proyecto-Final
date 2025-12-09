@@ -1,0 +1,23 @@
+/* Consistent visibility styles like Login */
+
+/* Label Visibility */
+.form-label {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* Placeholder Visibility */
+.form-control::placeholder {
+    color: #e0e0e0 !important;
+    opacity: 1;
+}
+
+/* Input Text Color */
+.form-control {
+    color: #fff;
+}
+
+/* Footer Text Visibility */
+.text-muted {
+    color: #cccccc !important;
+}

@@ -1,0 +1,147 @@
+/* HERO SECTION */
+.hero-slide-content {
+    height: 600px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background-color: #000;
+}
+
+.hero-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(20px) brightness(0.4);
+    /* Blur effect for background */
+    transform: scale(1.1);
+    /* Prevent white edges from blur */
+}
+
+.hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to top, var(--bg-main), transparent);
+    /* Blend into main bg */
+}
+
+.hero-poster {
+    max-height: 450px;
+    transform: perspective(1000px) rotateY(-10deg);
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+    transition: transform 0.5s;
+}
+
+.hero-poster:hover {
+    transform: perspective(1000px) rotateY(-10deg);
+}
+
+.text-shadow {
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* SECTION HEADERS */
+.section-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+
+.accent-bar {
+    width: 5px;
+    height: 30px;
+    background-color: var(--primary-color);
+    margin-right: 15px;
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+.section-title {
+    font-family: 'Oswald', sans-serif;
+    /* Stronger font if available, else standard */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.5rem;
+    color: white;
+}
+
+/* COMPACT GRID CARDS */
+.movie-card-small {
+    background-color: transparent;
+    border: none;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.movie-card-small:hover {
+    transform: translateY(-5px);
+    z-index: 10;
+}
+
+.poster-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    aspect-ratio: 2/3;
+}
+
+.poster-wrapper .card-img-top {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.movie-card-small:hover .card-img-top {
+    transform: scale(1.1);
+    filter: brightness(0.7);
+}
+
+.play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.movie-card-small:hover .play-overlay {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.tiny-badge {
+    font-size: 0.65rem;
+    padding: 0.35em 0.65em;
+}
+
+.tiny-btn {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-color: #333;
+    color: #aaa;
+}
+
+.tiny-btn:hover {
+    background-color: white;
+    color: black;
+}
+
+.card-title {
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0px;
+    color: #e0e0e0;
+}
+
+/* CAROUSEL CONTROLS */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+}

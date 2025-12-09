@@ -1,0 +1,21 @@
+/* Placeholders */
+.form-control::placeholder {
+    color: #e0e0e0 !important;
+    opacity: 1;
+}
+
+/* Input Text */
+.form-control {
+    color: #fff;
+}
+
+/* Footer Text (¿No tienes cuenta?) */
+.text-muted {
+    color: #cccccc !important;
+}
+
+/* Labels (Correo/Contraseña) */
+.form-label {
+    color: #ffffff;
+    font-weight: 500;
+}

@@ -1,0 +1,58 @@
+<div *ngIf="loading" class="text-center mt-5">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+    </div>
+</div>
+
+<div class="row mt-4" *ngIf="!loading && user">
+    <div class="col-md-4 text-center">
+        <div class="card p-4">
+            <div class="display-1 text-secondary"><i class="bi bi-person-circle"></i></div>
+            <h3 class="text-white">{{ user.username }}</h3>
+            <!-- Changed text-muted to text-white-50 -->
+            <p class="text-white-50">{{ user.email }}</p>
+            <hr>
+            <!-- Added text-light -->
+            <p class="text-light">{{ user.bio || 'Sin biografía disponible.' }}</p>
+            <!-- Changed text-muted to text-white-50 -->
+            <small class="text-white-50">Se unió: {{ user.created_at | date }}</small>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <h4 class="text-white">Mis Reseñas</h4>
+        <div *ngIf="reviews.length === 0" class="alert alert-info">Aún no has escrito reseñas.</div>
+
+        <div class="card mb-3" *ngFor="let review of reviews">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <!-- Added text-light -->
+                <span class="fw-bold text-light">{{ review.movie_title || 'Película' }}</span>
+                <div>
+                    <span *ngIf="!review.is_public" class="badge bg-secondary me-2"><i
+                            class="bi bi-eye-slash-fill"></i></span>
+                    <span class="badge bg-warning text-dark">★ {{ review.rating }}</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-white mb-2">{{ review.title }}</h5>
+
+                <div class="mb-2">
+                    <span *ngIf="review.would_recommend" class="badge bg-success me-1">Recomendada <i
+                            class="bi bi-hand-thumbs-up-fill"></i></span>
+                    <span *ngIf="!review.would_recommend" class="badge bg-danger me-1">No Recomendada <i
+                            class="bi bi-hand-thumbs-down-fill"></i></span>
+                    <span *ngIf="review.contains_spoilers" class="badge bg-danger border border-light"><i
+                            class="bi bi-exclamation-triangle-fill"></i> Spoilers</span>
+                </div>
+
+                <!-- Added text-light -->
+                <p class="card-text text-light">{{ review.comment }}</p>
+                <a [routerLink]="['/movies', review.movie_id]" class="btn btn-sm btn-outline-primary mt-2">Ver
+                    Película</a>
+            </div>
+            <!-- Changed text-muted to text-white-50 -->
+            <div class="card-footer text-white-50 font-monospace" style="font-size: 0.8rem;">
+                {{ review.created_at | date:'medium' }}
+            </div>
+        </div>
+    </div>
+</div>

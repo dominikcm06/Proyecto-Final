@@ -1,0 +1,69 @@
+<div *ngIf="loading" class="text-center mt-5">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+    </div>
+</div>
+
+<div class="row mt-4" *ngIf="!loading && movie">
+    <div class="col-md-4">
+        <img [src]="movie.image_url" class="img-fluid rounded shadow" [alt]="movie.title" referrerpolicy="no-referrer">
+    </div>
+    <div class="col-md-8">
+        <!-- Improved Visibility for Title and Year -->
+        <h1 class="display-5 text-white">{{ movie.title }} <small class="text-white-50 fs-4 fw-bold ms-2">({{
+                movie.release_year }})</small></h1>
+        <p class="lead mt-3 text-light">{{ movie.description }}</p>
+
+        <hr class="my-4 border-secondary">
+
+        <h3 class="text-white">Reseñas</h3>
+        <div class="review-list mb-4">
+            <div *ngIf="reviews.length === 0" class="alert alert-secondary">No hay reseñas aún. ¡Sé el primero!</div>
+
+            <div class="card mb-3 bg-dark border-secondary" *ngFor="let review of reviews">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <!-- Review Title -->
+                            <h5 class="text-white mb-1">
+                                {{ review.title }}
+                            </h5>
+                            <!-- Author & Badges -->
+                            <div class="mb-2">
+                                <span class="text-danger fw-bold me-2">{{ review.username }}</span>
+                                <span *ngIf="review.would_recommend" class="badge bg-success me-1"
+                                    title="Recomendada"><i class="bi bi-hand-thumbs-up-fill"></i></span>
+                                <span *ngIf="!review.would_recommend" class="badge bg-danger me-1"
+                                    title="No recomendada"><i class="bi bi-hand-thumbs-down-fill"></i></span>
+                                <span *ngIf="review.contains_spoilers" class="badge bg-danger border border-light"
+                                    title="Spoilers"><i class="bi bi-exclamation-triangle-fill"></i> Spoiler</span>
+                            </div>
+                        </div>
+                        <span class="badge bg-warning text-dark fs-6">★ {{ review.rating }}/5</span>
+                    </div>
+
+                    <!-- Comment -->
+                    <p class="card-text text-light mt-2">{{ review.comment }}</p>
+
+                    <div
+                        class="d-flex justify-content-between align-items-center mt-3 border-top border-secondary pt-2">
+                        <small class="text-white-50">{{ review.created_at | date }}</small>
+                        <small *ngIf="!review.is_public" class="text-secondary"><i
+                                class="bi bi-eye-slash-fill me-1"></i>Privada</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Review Form -->
+        <div *ngIf="auth.isAuthenticated(); else loginPrompt">
+            <app-review-form [movieId]="movie.id" (reviewAdded)="onReviewAdded()"></app-review-form>
+        </div>
+        <ng-template #loginPrompt>
+            <div class="alert alert-info">
+                Por favor <a routerLink="/login" class="alert-link">Inicia Sesión</a> para dejar una reseña.
+            </div>
+        </ng-template>
+
+    </div>
+</div>

@@ -1,0 +1,121 @@
+<!-- Loading State -->
+<div *ngIf="loading" class="text-center mt-5">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+    </div>
+</div>
+
+<!-- Error State -->
+<div *ngIf="errorMessage" class="alert alert-danger text-center mt-3 container">
+    {{ errorMessage }}
+    <br>
+    <small>Intenta recargar la página.</small>
+</div>
+
+<div *ngIf="!loading && !errorMessage" class="pb-5">
+
+    <!-- HERO CAROUSEL -->
+    <div id="heroCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button *ngFor="let m of featuredMovies; let i = index" type="button" data-bs-target="#heroCarousel"
+                [attr.data-bs-slide-to]="i" [class.active]="i === 0"></button>
+        </div>
+        <div class="carousel-inner">
+            <div *ngFor="let movie of featuredMovies; let i = index" class="carousel-item" [class.active]="i === 0">
+                <div class="hero-slide-content position-relative">
+                    <!-- Blur Backdrop -->
+                    <div class="hero-backdrop" [style.background-image]="'url(' + movie.image_url + ')'"></div>
+                    <div class="hero-overlay"></div>
+
+                    <div class="container position-relative h-100 d-flex align-items-center">
+                        <div class="row w-100 align-items-center">
+                            <div class="col-md-5 text-shadow">
+                                <span class="badge bg-primary mb-2">DESTACADO</span>
+                                <h1 class="display-3 fw-bold">{{ movie.title }}</h1>
+                                <p class="lead text-light mb-4">{{ movie.description | slice:0:150 }}...</p>
+                                <div class="d-flex gap-3">
+                                    <button class="btn btn-outline-light btn-lg px-4"
+                                        [routerLink]="['/movies', movie.id]">
+                                        <i class="bi bi-info-circle me-2"></i> MÁS DETALLES
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-7 d-none d-md-block text-end">
+                                <img [src]="movie.image_url" class="img-fluid rounded shadow-lg hero-poster"
+                                    [alt]="movie.title">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+    </div>
+
+    <div class="container-fluid px-4">
+
+        <!-- SECTION 1: PELÍCULAS TAQUILLERAS -->
+        <div class="section-header mb-3 d-flex align-items-center">
+            <div class="accent-bar"></div>
+            <h2 class="section-title m-0 ms-2">PELÍCULAS TAQUILLERAS</h2>
+        </div>
+
+        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 row-cols-xl-8 g-3 mb-5">
+            <div class="col" *ngFor="let movie of trendingMovies">
+                <div class="card h-100 movie-card-small shadow-sm" [routerLink]="['/movies', movie.id]">
+                    <div class="poster-wrapper">
+                        <img [src]="movie.image_url" class="card-img-top" [alt]="movie.title"
+                            referrerpolicy="no-referrer">
+                        <!-- Removed Play Overlay -->
+                    </div>
+                    <div class="card-body p-2">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <small class="text-light fw-bold">{{ movie.release_year }}</small>
+                        </div>
+                        <h6 class="card-title text-truncate" [title]="movie.title">{{ movie.title }}</h6>
+                        <button class="btn btn-outline-secondary w-100 btn-sm mt-1 py-0 tiny-btn"
+                            [routerLink]="['/watchlists']" [queryParams]="{ add_movie: movie.id }"
+                            (click)="$event.stopPropagation()">
+                            <i class="bi bi-plus-circle"></i> WATCHLIST
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: NUEVAS -->
+        <div class="section-header mb-3 d-flex align-items-center">
+            <div class="accent-bar"></div>
+            <h2 class="section-title m-0 ms-2">ESTRENOS Y NUEVAS</h2>
+        </div>
+
+        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 row-cols-xl-8 g-3">
+            <div class="col" *ngFor="let movie of newMovies">
+                <div class="card h-100 movie-card-small shadow-sm" [routerLink]="['/movies', movie.id]">
+                    <div class="poster-wrapper">
+                        <img [src]="movie.image_url" class="card-img-top" [alt]="movie.title"
+                            referrerpolicy="no-referrer">
+                        <!-- Removed Play Overlay -->
+                    </div>
+                    <div class="card-body p-2">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <small class="text-light fw-bold">{{ movie.release_year }}</small>
+                        </div>
+                        <h6 class="card-title text-truncate" [title]="movie.title">{{ movie.title }}</h6>
+                        <button class="btn btn-outline-secondary w-100 btn-sm mt-1 py-0 tiny-btn"
+                            [routerLink]="['/watchlists']" [queryParams]="{ add_movie: movie.id }"
+                            (click)="$event.stopPropagation()">
+                            <i class="bi bi-plus-circle"></i> WATCHLIST
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
